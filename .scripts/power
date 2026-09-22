@@ -1,0 +1,25 @@
+#!/bin/sh
+
+choice=$(
+    printf '%s\n' Shutdown Reboot Logout Suspend Lock |
+    dmenu -p "Power:" -l 5
+)
+
+case "$choice" in
+    Shutdown)
+        loginctl poweroff
+        ;;
+    Reboot)
+        loginctl reboot
+        ;;
+    Logout)
+        loginctl terminate-session "${XDG_SESSION_ID:-}"
+        ;;
+    Suspend)
+        loginctl suspend
+        ;;
+    Lock)
+        slock
+        ;;
+esac
+

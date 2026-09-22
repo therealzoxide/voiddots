@@ -1,0 +1,41 @@
+# ~/.bash_prompt
+
+hexcolor_bold() {
+	local hex=${1#\#}
+	printf '\[\e[1;38;2;%d;%d;%dm\]' $((16#${hex:0:2})) $((16#${hex:2:2})) $((16#${hex:4:2}))
+}
+
+yellow=$(hexcolor_bold "#CDCD00")
+cyan=$(hexcolor_bold "#00CDCD")
+green=$(hexcolor_bold "#00CD00")
+reset='\[\e[0m\]'
+
+git_status_symbols() {
+	local symbols="git"
+	local output
+
+	output=$(git status --porcelain 2>/dev/null) || return
+
+	[[ $output =~ ^[[:space:]]*[MAR] ]] && symbols+=" +"
+	[[ $output =~ [[:space:]]M|^\?\? ]] && symbols+=" *"
+	[[ $output =~ [[:space:]]D|^D ]] && symbols+=" -"
+
+	if git rev-parse --abbrev-ref --symbolic-full-name @{u} &>/dev/null; then
+		local ahead
+		ahead=$(git rev-list --left-right --count HEAD...@{u} 2>/dev/null | awk '{print $1}')
+		((ahead > 0)) && symbols+=" ^"
+	fi
+
+	echo "$symbols"
+}
+
+update_prompt() {
+	if git rev-parse --is-inside-work-tree &>/dev/null; then
+		local git_status=$(git_status_symbols)
+		PS1="${yellow}\w ${cyan}[${git_status}]${reset}\n${green}>> ${reset}"
+	else
+		PS1="${yellow}\w${reset}\n${green}>> ${reset}"
+	fi
+}
+
+PROMPT_COMMAND=update_prompt
