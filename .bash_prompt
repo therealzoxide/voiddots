@@ -1,38 +1,28 @@
-# ~/.bash_prompt
-
 yellow='\[\e[1;38;2;255;255;0m\]'
 cyan='\[\e[1;38;2;0;255;255m\]'
 green='\[\e[1;38;2;0;255;0m\]'
 reset='\[\e[0m\]'
 
 git_status_symbols() {
-	local symbols="git"
-	local output
-
+	local symbols="git" output
 	output=$(git status --porcelain 2>/dev/null) || return
-
 	[[ $output =~ ^[[:space:]]*[MAR] ]] && symbols+=" +"
 	[[ $output =~ [[:space:]]M|^\?\? ]] && symbols+=" *"
 	[[ $output =~ [[:space:]]D|^D ]] && symbols+=" -"
-
 	if git rev-parse --abbrev-ref --symbolic-full-name @{u} &>/dev/null; then
 		local ahead
 		ahead=$(git rev-list --left-right --count HEAD...@{u} 2>/dev/null | awk '{print $1}')
-		((ahead > 0)) && symbols+=" ^"
+		(( ahead > 0 )) && symbols+=" ^"
 	fi
-
 	echo "$symbols"
 }
 
 update_prompt() {
+	local git_status=""
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		local git_status
-		git_status=$(git_status_symbols)
-		PS1="${yellow}\w ${cyan}[${git_status}]${reset}\n${green}>> ${reset}"
-	else
-		PS1="${yellow}\w${reset}\n${green}>> ${reset}"
+		git_status=" ${cyan}[$(git_status_symbols)]"
 	fi
+	PS1="${yellow}\w${git_status}${reset}\n${green}>> ${reset}"
 }
 
 PROMPT_COMMAND=update_prompt
-
