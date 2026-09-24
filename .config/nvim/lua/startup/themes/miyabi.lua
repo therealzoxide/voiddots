@@ -36,7 +36,7 @@ local settings = {
 			'⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠛⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
 		},
 		highlight = "String",
-		default_color = "#00CD00",
+		default_color = "#00FF00",
 		oldfiles_amount = 0,
 	},
 
@@ -55,7 +55,7 @@ local settings = {
 			{ "Quit", ":q!", "q" },
 		},
 		highlight = "Type",
-		default_color = "#00CDCD",
+		default_color = "#00FFFF",
 		oldfiles_amount = 0,
 	},
 
@@ -75,7 +75,7 @@ local settings = {
 		'╚═════╝ ╚═╝ ╚═════╝     ╚═╝  ╚═╝╚══════╝╚══════╝    ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝',
 	},
 	highlight = "String",
-	default_color = "#00CD00",
+	default_color = "#00FF00",
 	oldfiles_amount = 0,
 	},
 
@@ -97,7 +97,7 @@ local settings = {
 
 	colors = {
 		background = "#000000",
-		folded_section = "#00CD00",
+		folded_section = "#00FF00",
 	},
 
 	parts = { "header", "body", "footer" },

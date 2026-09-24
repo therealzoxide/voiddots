@@ -1,13 +1,8 @@
 # ~/.bash_prompt
 
-hexcolor_bold() {
-	local hex=${1#\#}
-	printf '\[\e[1;38;2;%d;%d;%dm\]' $((16#${hex:0:2})) $((16#${hex:2:2})) $((16#${hex:4:2}))
-}
-
-yellow=$(hexcolor_bold "#CDCD00")
-cyan=$(hexcolor_bold "#00CDCD")
-green=$(hexcolor_bold "#00CD00")
+yellow='\[\e[1;38;2;255;255;0m\]'
+cyan='\[\e[1;38;2;0;255;255m\]'
+green='\[\e[1;38;2;0;255;0m\]'
 reset='\[\e[0m\]'
 
 git_status_symbols() {
@@ -31,7 +26,8 @@ git_status_symbols() {
 
 update_prompt() {
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		local git_status=$(git_status_symbols)
+		local git_status
+		git_status=$(git_status_symbols)
 		PS1="${yellow}\w ${cyan}[${git_status}]${reset}\n${green}>> ${reset}"
 	else
 		PS1="${yellow}\w${reset}\n${green}>> ${reset}"
@@ -39,3 +35,4 @@ update_prompt() {
 }
 
 PROMPT_COMMAND=update_prompt
+

@@ -5,21 +5,13 @@ local lualine = require('lualine')
 
 local colors = {
 	black = "#000000",
-	red = "#CD0000",
-	green = "#00CD00",
-	yellow = "#CDCD00",
-	blue = "#0000EE",
-	magenta = "#CD00CD",
-	cyan = "#00CDCD",
-	white = "#E5E5E5",
-	bright_black = "#7F7F7F",
-	bright_red = "#FF0000",
-	bright_green = "#00FF00",
-	bright_yellow = "#FFFF00",
-	bright_blue = "#5C5CFF",
-	bright_magenta = "#FF00FF",
-	bright_cyan = "#00FFFF",
-	bright_white = "#FFFFFF",
+	red = "#FF0000",
+	green = "#00FF00",
+	yellow = "#FFFF00",
+	blue = "#5C5CFF",
+	magenta = "#FF00FF",
+	cyan = "#00FFFF",
+	white = "#FFFFFF",
 }
 
 local conditions = {

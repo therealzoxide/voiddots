@@ -1,6 +1,6 @@
 # -*- mode: sh; mode: sh-bash -*-
 
-source ~/.scripts/bash/colors
+source ~/.scripts/colors
 
 ##################
 # Basic settings #
@@ -16,21 +16,12 @@ bleopt exec_errexit_mark=
 # TRANSIENT PROMPT SETTINGS #
 #############################
 
-function hexcolor_bold {
-	local hex=${1#\#}
-	printf '\e[1;38;2;%d;%d;%dm' \
-		"$((16#${hex:0:2}))" \
-		"$((16#${hex:2:2}))" \
-		"$((16#${hex:4:2}))"
-}
-
-local green=$(hexcolor_bold "$green")
+local green=$'\e[1;38;2;0;255;0m'
 local reset=$'\e[0m'
 
 bleopt prompt_ps1_final="${green}>>${reset} "
-
-
 bleopt prompt_ps1_transient=trim
+
 
 ################
 # Vim Settings #
